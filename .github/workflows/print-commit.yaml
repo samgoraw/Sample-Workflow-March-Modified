@@ -4,16 +4,23 @@ on:
   push:
     branches:
       - main
+      # - '**' this means run when you push on any branch
 
 jobs:
-  print-message:
+  print-message:                      #GitHub allocates a clean virtual machine (usually a Docker container or VM) with tools like Git, Node, Python, etc., preinstalled
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code            #GitHub Actions uses the official actions/checkout action to clone the repo.#It runs a git clone under the hood, scoped to your commit.
         uses: actions/checkout@v4
 
       - name: Print Message
         run: 
-          echo "Commit message:"
+          echo "Commit message:"                            
           git log -1 --pretty=%B
+
+          #Building & commiting checkout is required
+           #Git is already available in the Ubuntu runner
+           #Since the code was checked out using the previous step, the .git history is available
+           #git log -1 retrieves the most recent commit
+           #%B tells Git to show only the commit message body
