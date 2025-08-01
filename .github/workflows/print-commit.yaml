@@ -1,21 +1,19 @@
-name: Print Commit Message 
+name: Print Commit Message
 
 on:
-   push:
-     branches:
-        - 'main'
-
+  push:
+    branches:
+      - main
 
 jobs:
-    print-message:
-        runs-on : ubuntu-latest
+  print-message:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        steps:
-          -name: Checkout code
-          uses: actions/checkout@v4
-
-          -name : Print Message
-          run: 
-              echo "Commit message:"
-              git log -1 --pretty=%B
+      - name: Print Message
+        run: 
+          echo "Commit message:"
+          git log -1 --pretty=%B
